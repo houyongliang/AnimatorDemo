@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/activity_main"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+ >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/bt_main_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始动画"/><Button
+            android:id="@+id/bt_main_tegether"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一起飞"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/iv_main"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/tabpager_indicator_selected"/>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,7 +1,9 @@
 package com.hyl.mis.animatordemo.view;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -12,6 +14,8 @@ import android.util.FloatMath;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.hyl.mis.animatordemo.Main2Activity;
+import com.hyl.mis.animatordemo.MainActivity;
 import com.hyl.mis.animatordemo.bean.Point;
 import com.hyl.mis.animatordemo.tools.PointEvaluator;
 
@@ -25,6 +29,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
  */
 
 public class MyAnimView extends View {
+    private  Animator.AnimatorListener listener;
     public static final float RADIUS = 50f;
     private Point currentPoint;
     private Paint mPaint;
@@ -32,6 +37,10 @@ public class MyAnimView extends View {
     private Boolean onBall;
     private float x;
     private float y;
+
+    public void getListener(Animator.AnimatorListener listener){
+        this.listener=listener;
+    }
 
     public MyAnimView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,14 +59,15 @@ public class MyAnimView extends View {
         }else{
             drawCircle(canvas);
         }
-        canvas.drawCircle(0,0,10,mPaint);
+
         super.onDraw(canvas);
     }
 
     private void startAnimation() {
         Point startPoint=new Point(RADIUS,RADIUS);//初始位置
         Point endPoint = new Point(getWidth() - RADIUS, getHeight() - RADIUS);
-        ValueAnimator anim=ValueAnimator.ofObject(new PointEvaluator(),startPoint,endPoint);
+        ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(),startPoint,endPoint);
+
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -66,6 +76,7 @@ public class MyAnimView extends View {
             }
         });
         anim.setDuration(5000).start();
+        anim.addListener(listener);
     }
 
     private void drawCircle(Canvas canvas) {
